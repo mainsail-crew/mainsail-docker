@@ -1,7 +1,7 @@
 FROM python:3-bullseye
 
 RUN addgroup --gid 1000 mainsail
-RUN adduser mainsail -u 1000 --gid 1000
+RUN useradd -rm -d /home/mainsail -u 1000 --gid 1000 mainsail
 
 RUN apt-get update
 RUN apt-get install -y sudo wget cmake swig git supervisor
