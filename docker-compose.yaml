@@ -12,7 +12,7 @@ services:
       dockerfile: Dockerfile
       context: web
     ports:
-      - '80:80/tcp'
+      - '8080:80/tcp'
     networks:
       - mainsail_net
     volumes:

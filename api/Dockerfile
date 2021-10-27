@@ -1,7 +1,7 @@
 FROM python:3-buster
 
 RUN addgroup --gid 1000 mainsail
-RUN useradd -rm -d /home/mainsail -u 1000 --gid 1000 mainsail
+RUN useradd -rm -d /home/mainsail -u 1000 -g 1000 mainsail
 
 RUN apt-get update
 RUN apt-get install -y sudo wget cmake swig git supervisor

@@ -1,7 +1,7 @@
 FROM nginx:1
 
-RUN addgroup -g 1000 mainsail
-RUN useradd -rm -u 1000 -G mainsail -h /home/mainsail mainsail
+RUN addgroup --gid 1000 mainsail
+RUN useradd -rm -d /home/mainsail -u 1000 -g 1000 mainsail
 
 COPY nginx/common_vars.conf /etc/nginx/conf.d/common_vars.conf
 COPY nginx/upstreams.conf /etc/nginx/conf.d/upstreams.conf
