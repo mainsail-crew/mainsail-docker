@@ -1,4 +1,4 @@
-FROM python:3-bullseye
+FROM python:3-buster
 
 RUN addgroup --gid 1000 mainsail
 RUN useradd -rm -d /home/mainsail -u 1000 --gid 1000 mainsail
