@@ -16,6 +16,10 @@ RUN bash /tmp/install-debian.sh 2>/dev/null; exit 0;
 
 USER root
 
+RUN apt-get -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 COPY start-api /bin/start-api
 RUN chmod +x /bin/start-api
 
