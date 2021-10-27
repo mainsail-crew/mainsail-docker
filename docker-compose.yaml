@@ -1,0 +1,33 @@
+version: '3.9'
+volumes:
+  moonraker-db:
+    driver: 'local'
+networks:
+  mainsail_net:
+    driver: bridge
+services:
+  web:
+    container_name: 'mainsail-stack-web'
+    build:
+      dockerfile: Dockerfile
+      context: web
+    ports:
+      - '80:80'
+    networks:
+      - mainsail_net
+    volumes:
+      - ./data:/home/mainsail
+    depends_on:
+      - api
+  api:
+    container_name: 'mainsail-stack-api'
+    build:
+      context: api
+      dockerfile: Dockerfile
+    networks:
+      - mainsail_net
+    volumes:
+      - ./api/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
+      - moonraker-db:/home/mainsail/.moonraker_db
+      - ./data:/home/mainsail
+      - /dev:/dev

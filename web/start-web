@@ -1,0 +1,17 @@
+#!/bin/sh
+
+cd /home/mainsail
+
+if ! [ -f "has_run" ]; then
+    touch has_run
+    chown -hR mainsail:mainsail .[^.]*
+fi
+
+if ! [ -d "mainsail" ]; then
+    su mainsail -c "wget https://github.com/meteyou/mainsail/releases/latest/download/mainsail.zip"
+    su mainsail -c "mkdir mainsail"
+    su mainsail -c "unzip -o -d mainsail mainsail.zip"
+fi
+
+nginx -t
+nginx -g "daemon off;"

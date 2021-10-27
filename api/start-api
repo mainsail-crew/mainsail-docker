@@ -1,0 +1,27 @@
+#!/bin/bash
+sudo -S ln -s /bin/true /bin/systemctl
+
+if ! [ -d "moonraker" ]; then
+    git clone https://github.com/Arksine/moonraker.git
+    cd moonraker
+    sed -E 's/check_klipper\(\)/check_klipper() { return 0; }\nold()/' ./scripts/install-moonraker.sh > ./scripts/install-moonraker2.sh
+    bash ./scripts/install-moonraker2.sh
+fi
+
+cd /home/mainsail
+
+if ! [ -d "klipper" ]; then
+    echo "installing klipper"
+    mkdir klipper_logs
+    mkdir klipper_config
+
+    git clone https://github.com/klipper3d/klipper
+    cd klipper
+    chmod +x ./scripts/install-debian.sh
+    ./scripts/install-debian.sh
+fi
+
+sudo -S rm /bin/systemctl
+sudo -S ln -s /usr/bin/supervisorctl /bin/systemctl
+
+/usr/bin/supervisord
