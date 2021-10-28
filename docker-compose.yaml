@@ -28,6 +28,5 @@ services:
       - mainsail_net
     volumes:
       - ./api/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
-      - moonraker-db:/home/mainsail/.moonraker_db
       - ./data:/home/mainsail
       - /dev:/dev
