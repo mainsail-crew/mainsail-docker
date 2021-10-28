@@ -21,6 +21,9 @@ services:
       - api
   api:
     container_name: 'mainsail-stack-api'
+    privileged: true
+    tty: true
+    stdin_open: true
     build:
       context: api
       dockerfile: Dockerfile

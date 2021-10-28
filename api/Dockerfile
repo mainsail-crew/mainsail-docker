@@ -21,7 +21,7 @@ RUN /bin/bash -c "source /tmp/install-moonraker2.sh && install_packages"
 
 USER root
 
-RUN usermod -aG dialout mainsail
+RUN usermod -aG dialout,tty mainsail
 
 RUN apt-get -y autoremove \
     && apt-get clean \
