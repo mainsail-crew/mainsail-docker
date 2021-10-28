@@ -8,6 +8,7 @@ networks:
 services:
   web:
     container_name: 'mainsail-stack-web'
+    restart: always
     build:
       dockerfile: Dockerfile
       context: web
@@ -21,6 +22,7 @@ services:
       - api
   api:
     container_name: 'mainsail-stack-api'
+    restart: always
     privileged: true
     tty: true
     stdin_open: true
