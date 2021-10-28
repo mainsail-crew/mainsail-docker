@@ -4,7 +4,7 @@ cd /home/mainsail
 
 if ! [ -f "has_run" ]; then
     touch has_run
-    chown -hR mainsail:mainsail .[^.]*
+    sudo chown -hR mainsail:mainsail .[^.]*
 fi
 
 if ! [ -d "mainsail" ]; then
