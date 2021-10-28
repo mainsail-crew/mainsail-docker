@@ -1,5 +1,7 @@
 FROM debian:buster-slim as base
 
+LABEL org.opencontainers.image.description="api stack for mainsail with moonraker and klipper as a service"
+
 RUN addgroup --gid 1000 mainsail
 RUN useradd -rm -d /home/mainsail -u 1000 -g 1000 mainsail
 

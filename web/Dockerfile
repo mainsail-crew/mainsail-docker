@@ -1,5 +1,7 @@
 FROM nginx:1
 
+LABEL org.opencontainers.image.description="Mainsail nginx image with upstream and webcam configs"
+
 RUN addgroup --gid 1000 mainsail
 RUN useradd -rm -d /home/mainsail -u 1000 -g 1000 mainsail
 
