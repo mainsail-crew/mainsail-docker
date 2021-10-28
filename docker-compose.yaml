@@ -29,6 +29,8 @@ services:
     build:
       context: api
       dockerfile: Dockerfile
+    ports:
+      - '7125:7125'
     networks:
       - mainsail_net
     volumes:
