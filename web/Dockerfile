@@ -8,7 +8,12 @@ COPY nginx/upstreams.conf /etc/nginx/conf.d/upstreams.conf
 COPY nginx/mainsail.conf /etc/nginx/conf.d/default.conf
 
 RUN apt-get update \
-    && apt-get install -y unzip
+    && apt-get install -y unzip wget \
+
+RUN apt-get -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+
 COPY start-web /bin/start-web
 RUN chmod +x /bin/start-web
 
