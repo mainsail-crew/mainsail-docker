@@ -21,6 +21,8 @@ RUN /bin/bash -c "source /tmp/install-moonraker2.sh && install_packages"
 
 USER root
 
+COPY supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+
 RUN usermod -aG dialout,tty mainsail
 
 RUN apt-get -y autoremove \

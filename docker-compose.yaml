@@ -34,6 +34,5 @@ services:
     networks:
       - mainsail_net
     volumes:
-      - ./api/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
       - ./data:/home/mainsail
       - /dev:/dev
