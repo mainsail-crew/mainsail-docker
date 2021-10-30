@@ -1,4 +1,4 @@
-name: Build api image
+name: Build api or web image
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -8,7 +8,7 @@ name: Build api image
 on:
   push:
     # Publish semver tags as releases.
-    tags: [ 'api-v*.*.*' ]
+    tags: [ '*-v*.*.*' ]
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -29,12 +29,14 @@ jobs:
       - name: Prepare
         id: prepare
         run: |
-          DOCKER_IMAGE=mainsail/mainsail-docker-api
+          DOCKER_IMAGE=mainsail/mainsail-docker
           DOCKER_PLATFORMS=linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/386,linux/ppc64le,linux/s390x
           VERSION=edge
-
+          GIT_TAG=${GITHUB_REF#refs/tags/v}
+        
           if [[ $GITHUB_REF == refs/tags/* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/v}
+            TYPE=$(echo $GIT_TAG | sed 's/.*\///' | sed 's/\-.*//')
+            VERSION=$(echo $GIT_TAG | sed 's/.*\-//')
           fi
           if [ "${{ github.event_name }}" = "schedule" ]; then
             VERSION=nightly
@@ -45,13 +47,13 @@ jobs:
             TAGS="$TAGS --tag ${DOCKER_IMAGE}:latest"
           fi
 
-          echo ::set-output name=docker_image::${DOCKER_IMAGE}
+          echo ::set-output name=docker_image::${DOCKER_IMAGE}-${TYPE}
           echo ::set-output name=version::${VERSION}
           echo ::set-output name=buildx_args::--platform ${DOCKER_PLATFORMS} \
             --build-arg VERSION=${VERSION} \
             --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
             --build-arg VCS_REF=${GITHUB_SHA::8} \
-            ${TAGS} --file ./api/Dockerfile ./api
+            ${TAGS} --file ./${TYPE}/Dockerfile ./${TYPE}
 
       - name: Checkout repository
         uses: actions/checkout@v2
