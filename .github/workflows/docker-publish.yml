@@ -8,7 +8,7 @@ name: Build web image
 on:
   push:
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    tags: [ 'web-v*.*.*' ]
 
 env:
   # Use docker.io for Docker Hub if empty
