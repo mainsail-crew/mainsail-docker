@@ -8,7 +8,7 @@ name: Build api image
 on:
   push:
     # Publish semver tags as releases.
-    tags: [ 'api-v*.*.*-' ]
+    tags: [ 'api-v*.*.*' ]
 
 env:
   # Use docker.io for Docker Hub if empty
