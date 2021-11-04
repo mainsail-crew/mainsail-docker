@@ -6,7 +6,9 @@ RUN addgroup --gid 1000 mainsail
 RUN useradd -rm -d /home/mainsail -u 1000 -g 1000 mainsail
 
 RUN apt-get update
-RUN apt-get install -y sudo wget cmake swig git supervisor
+RUN apt-get install -y sudo wget cmake swig git supervisor python-numpy python-matplotlib
+
+RUN echo "mainsail ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 RUN usermod -aG dialout,tty,sudo mainsail
 
